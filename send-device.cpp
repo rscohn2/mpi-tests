@@ -15,6 +15,8 @@ int main(int argc, char *argv[]) {
   MPI_Wait(&send_request, MPI_STATUS_IGNORE);
   MPI_Wait(&recv_request, MPI_STATUS_IGNORE);
 
+  std::cout << "OK\n";
+  
   sycl::free(data, q);
   MPI_Finalize();
   return 0;
