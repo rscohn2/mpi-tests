@@ -22,3 +22,7 @@ link_libraries(MPI::MPI_CXX)
 add_executable(send-receive send-receive.cpp)
 add_mpi_test(send-receive-device-2 send-receive 2 device)
 add_mpi_test(send-receive-shared-2 send-receive 2)
+
+add_executable(put-get put-get.cpp)
+add_mpi_test(put-get-device-2 put-get 2 device)
+add_mpi_test(put-get-shared-2 put-get 2)
