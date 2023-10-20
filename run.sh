@@ -2,7 +2,7 @@
 source /opt/intel/oneapi/setvars.sh
 mkdir build
 cd build
-cmake ..
+CXX=icpx cmake ..
 make -j
 I_MPI_OFFLOAD=0 mpirun -n 2  ./send-receive
 I_MPI_OFFLOAD=0 mpirun -n 2  ./put-get
