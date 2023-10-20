@@ -10,5 +10,4 @@ jobs:
     runs-on: test-3
     steps:
     - uses: actions/checkout@v4
-    - run: ./run.sh
-      
+    - run: srun ./run.sh
