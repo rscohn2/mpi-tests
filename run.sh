@@ -1,4 +1,6 @@
 #! /bin/bash
+unset SLURM_JOBID
+unset SLURM_TASKS_PER_NODE
 source /opt/intel/oneapi/setvars.sh
 mkdir build
 cd build
