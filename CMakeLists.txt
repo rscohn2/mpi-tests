@@ -26,3 +26,6 @@ add_mpi_test(send-receive-shared-2 send-receive 2)
 add_executable(put-get put-get.cpp)
 add_mpi_test(put-get-device-2 put-get 2 device)
 add_mpi_test(put-get-shared-2 put-get 2)
+
+add_executable(p2p p2p.cpp)
+add_test(NAME p2p COMMAND ./p2p)
