@@ -14,6 +14,9 @@ function(add_mpi_test test_name name processes)
                    ${MPIEXEC_PREFLAGS} ./${name} ${ARGN} COMMAND_EXPAND_LISTS)
 endfunction()
 
+add_compile_options(-O0 -g)
+add_link_options(-O0 -g)
+
 add_compile_options(-fsycl)
 add_link_options(-fsycl)
 find_package(MPI REQUIRED)

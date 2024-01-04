@@ -27,6 +27,16 @@ int main(int argc, char *argv[]) {
   MPI_Win_fence(0, win);
 
   
+  int dst_rank = (rank + 1) % size;
+  int src_rank = (rank - 1 + size) % size;
+
+  int put_val = 1;
+  MPI_Put(&put_val, 1, MPI_INT, dst_rank, 0, 1, MPI_INT, win);
+  MPI_Win_fence(0, win);
+  int put_res = 0;
+  q.copy(data, &put_res, 1).wait();
+  assert(put_res == put_val);
+
   sycl::free(data, q);
   MPI_Finalize();
   return 0;
