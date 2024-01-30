@@ -14,12 +14,16 @@ int main(int argc, char *argv[]) {
   sycl::queue q;
   int *data = nullptr;
   bool use_device = argc >= 2 && std::string(argv[1]) == "device";
+  bool use_shared = argc >= 2 && std::string(argv[1]) == "shared";
   if (use_device) {
     std::cout << "Allocating device memory\n";
     data = sycl::malloc_device<int>(sz, q);
-  } else {
+  } else if (use_shared) {
     std::cout << "Allocating shared memory\n";
     data = sycl::malloc_shared<int>(sz, q);
+  } else {
+    std::cout << "Allocating system memory\n";
+    data = static_cast<int*>(malloc(sz));
   }
 
   MPI_Win win;
@@ -37,7 +41,11 @@ int main(int argc, char *argv[]) {
   q.copy(data, &put_res, 1).wait();
   assert(put_res == put_val);
 
-  sycl::free(data, q);
+  if (use_device || use_shared) {
+    sycl::free(data, q);
+  } else {
+    free(data);
+  }
   MPI_Finalize();
   return 0;
 }
